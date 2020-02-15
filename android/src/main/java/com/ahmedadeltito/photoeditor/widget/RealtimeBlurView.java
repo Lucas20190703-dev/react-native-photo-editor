@@ -233,7 +233,7 @@ public class RealtimeBlurView extends View {
 
                 // just erase transparent
                 //mBitmapToBlur.eraseColor(mOverlayColor & 0xffffff);
-                mBitmapToBlur.eraseColor(0x000000);
+                mBitmapToBlur.eraseColor(0xffffff);
 
                 int rc = mBlurringCanvas.save();
                 mIsRendering = true;

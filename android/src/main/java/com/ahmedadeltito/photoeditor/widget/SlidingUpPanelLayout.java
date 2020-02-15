@@ -1186,8 +1186,8 @@ public class SlidingUpPanelLayout extends ViewGroup {
         boolean result;
 
         int save = 0;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            save = canvas.saveLayer(null, null);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            save = canvas.saveLayer(0, 0, getWidth(), getHeight(), null, Canvas.ALL_SAVE_FLAG);
         } else {
             save = canvas.save();
         }
