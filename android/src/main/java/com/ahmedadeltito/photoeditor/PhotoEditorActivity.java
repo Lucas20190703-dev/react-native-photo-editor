@@ -97,7 +97,7 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
     private int imageOrientation;
 
     // CROP OPTION
-    private boolean cropperCircleOverlay = false;
+    private boolean cropperCircleOverlay = true;
     private boolean freeStyleCropEnabled = false;
     private boolean showCropGuidelines = true;
     private boolean hideBottomControls = false;
@@ -108,9 +108,11 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_photo_editor);
 
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         selectedImagePath = getIntent().getExtras().getString("selectedImagePath");	
         if (selectedImagePath.contains("content://")) {
@@ -451,7 +453,7 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
                         }
 
                         String selectedOutputPath = mediaStorageDir.getPath() + File.separator + imageName;
-                        returnIntent.putExtra("imagePath", selectedOutputPath);
+                        returnIntent.putExtra("imagePathimagePath", selectedOutputPath);
                         Log.d("PhotoEditorSDK", "selected camera path " + selectedOutputPath);
                         File file = new File(selectedOutputPath);
 
