@@ -31,6 +31,8 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -157,7 +159,7 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
         Button clearAllButton = (Button) findViewById(R.id.clear_all_tv);
         //TextView clearAllTextTextView = (TextView) findViewById(R.id.clear_all_text_tv);
         Button goToNextButton = (Button) findViewById(R.id.go_to_next_screen_tv);
-        ImageView photoEditImageView = (ImageView) findViewById(R.id.photo_edit_iv);
+        photoEditImageView = (ImageView) findViewById(R.id.photo_edit_iv);
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         topShadow = findViewById(R.id.top_shadow);
         topShadowRelativeLayout = (RelativeLayout) findViewById(R.id.top_parent_rl);
@@ -782,12 +784,13 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
             if (data != null) {
                 final Uri resultUri = UCrop.getOutput(data);
                 if (resultUri != null) {
                     try {
-                        selectedImagePath = resultUri.toString();
+                        selectedImagePath = getPath(resultUri);
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver() , resultUri);
                         photoEditImageView.setImageBitmap(bitmap);
                     } catch (Exception ex) {
